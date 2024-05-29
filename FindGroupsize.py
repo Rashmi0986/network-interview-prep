@@ -4,8 +4,6 @@ def findGroupSize(prefix, IP):
     
     groupSize = 2 ** group
     usablehosts = groupSize - 2
-    
-    
     for i in range(0,255,groupSize):
         result.append(i)
     
