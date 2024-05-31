@@ -4,8 +4,7 @@ def findGroupSize(prefix, IP):
     
     groupSize = 2 ** group
     usablehosts = groupSize - 2
-    for i in range(0,255,groupSize):
-        result.append(i)
+    result = [ i for i in range(0,255,groupSize)]
     
     hosts = []
     firstIP = ""
@@ -28,7 +27,8 @@ def findGroupSize(prefix, IP):
     
     for host in hosts:
         print(f"subnet number : {host}")
-    
+
+#####Invoke a method #######
 prefix = int(input("please enter the prefix in the range between 25 to 30 "))
 ip = input("please enter the ip in x.x.x format ")
 findGroupSize(prefix, ip)
