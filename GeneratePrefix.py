@@ -1,5 +1,13 @@
-Given the subnetmask generate the Prefix for the same 
-   - constraints: validate and generate only for valid subnets 
+#Given the subnetmask generate the Prefix for the same 
+   #- constraints: validate and generate only for valid subnets 
+
+"""
+Algorithm 
+1. first generate all subnets 
+2. Validate if the given Ip is in the subnet list 
+3. if valid convert each octet to binary 
+4. return the prefix 
+"""
 
 def getSubnetMask(prefix):
     value = ""
@@ -40,7 +48,7 @@ def getallSubnets():
         subnetMaskSet.add(getSubnetMask(i))
     return subnetMaskSet
 
-def trans(octet):
+def trans(octet): # this method converts each octet to binary  
     bits = []
     octet = int(octet)
     while octet:
@@ -53,11 +61,11 @@ def getPrefix(subnetMask):
     allSubnets = getallSubnets()
     res = ""
     total = 0
-    if subnetMask in allSubnets:
-        values = subnetMask.split(".")
+    if subnetMask in allSubnets: # check if it is valid subnetmask first 
+        values = subnetMask.split(".") # split IP by dot to get the exact values
         for val in values:
-            res = trans(val)
-            total += res.count(1)
+            res = trans(val) # convert to binary
+            total += res.count(1) # count the number of 1's 
         return total
     else:
         return f"invalid Subnetmask!! can't convert"
