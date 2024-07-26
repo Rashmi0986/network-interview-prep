@@ -1,4 +1,4 @@
-from rich import print
+from rich.pretty import pprint
 def parseCLI():
     csv_mapping_list = []
     row_dict = dict()
@@ -16,4 +16,4 @@ def parseCLI():
             line_count += 1
     return interfaceDict
 result = parseCLI()
-print(result)
+pprint(result,expand_all=True)
