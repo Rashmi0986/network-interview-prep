@@ -101,8 +101,9 @@ print('-' * len(header))
 for row in table_data:
     print(f"{row['Interface Name']:<15} {row['IP Address']:<20} {row['MAC Address']:<17}")
 
-
+"""
 Interface Name  IP Address      MAC Address      
 --------------------------------------------------
 eth0            172.17.106.119  00:15:5d:01:25:01 
 lo              127.0.0.1       N/A              
+"""
