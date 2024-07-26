@@ -1,3 +1,5 @@
+Using the attached file show_ip_int_brief.txt, create a comprehensive dictionary containing information about all interfaces. This includes interfaces with and without an IP address.
+
 Interface              IP-Address      OK? Method Status                Protocol
 GigabitEthernet0/0/0   10.220.88.22    YES NVRAM  up                    up      
 GigabitEthernet0/0/1   unassigned      YES unset  administratively down down    
@@ -8,3 +10,45 @@ GigabitEthernet0/1/3   unassigned      YES unset  down                  down
 Loopback98             10.254.98.1     YES manual up                    up      
 Loopback99             10.254.99.1     YES manual up                    up      
 Vlan1                  unassigned      YES manual up                    down    
+
+Requirements:
+
+For each interface, construct a dictionary where the key is the interface name.
+The value for each interface key should be another dictionary containing the following three keys:
+"ip_addr": The IP address associated with the interface (or an empty string if there is no IP address).
+"line_status": The status of the line (e.g., 'up' or 'down').
+"line_protocol": The protocol status (e.g., 'up' or 'down').
+Example Structure:
+
+For instance, the interface GigabitEthernet0/0/0 should be represented as:
+
+'GigabitEthernet0/0/0': {
+    'ip_addr': '10.220.88.22',
+    'line_status': 'up',
+    'line_protocol': 'up'
+}
+Output:
+
+Enclose all the individual interface dictionaries within a larger dictionary. This larger dictionary will have all the interfaces as keys, and the corresponding inner interface dictionaries as values. The inner dictionaries will include the "ip_addr", "line_status", and "line_protocol" key-value pairs.
+
+Finally, print this larger dictionary to the standard output using rich.print.
+
+Example Output:
+
+{
+    'GigabitEthernet0/0/0': {
+        'ip_addr': '10.220.88.22',
+        'line_status': 'up',
+        'line_protocol': 'up'
+    },
+    'GigabitEthernet0/0/1': {
+        'ip_addr': '',
+        'line_status': 'administratively down',
+        'line_protocol': 'down'
+    },
+    ...
+}
+
+
+
+
