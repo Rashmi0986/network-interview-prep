@@ -1,38 +1,20 @@
 import re
-import os
 
-def replace_in_large_file(file_path, chunk_size=1024*1024):
-    pattern = re.compile(r"aaa")
-    replace_with = "AAA"
-    temp_file_path = file_path + '.tmp'
+def replace_in_file(input_file_path, output_file_path, search_pattern, replace_string):
+    with open(input_file_path, 'r', encoding='utf-8') as infile, open(output_file_path, 'w', encoding='utf-8') as outfile:
+        buffer_size = 8 * 1024 * 1024  # 8 MB buffer size
+        buffer = infile.read(buffer_size)
 
-    with open(file_path, 'r') as input_file, open(temp_file_path, 'w') as temp_file:
-        buffer = ''
-        while True:
-            chunk = input_file.read(chunk_size)
-            if not chunk:
-                break
+        while buffer:
+            # Use re.sub() for pattern-based replacement
+            modified_buffer = re.sub(search_pattern, replace_string, buffer)
+            outfile.write(modified_buffer)
+            buffer = infile.read(buffer_size)
 
-            buffer += chunk
-            # Ensure that we don't cut off a match in the middle
-            if len(buffer) > chunk_size:
-                buffer_end = buffer[-len("aaa"):]
-                buffer = buffer[:-len("aaa")]
-            else:
-                buffer_end = ''
+if __name__ == "__main__":
+    input_file_path = 'input.txt'
+    output_file_path = 'output.txt'
+    search_pattern = r'find_me'  # Example regex pattern
+    replace_string = 'replace_with'
 
-            buffer = pattern.sub(replace_with, buffer)
-            temp_file.write(buffer)
-            buffer = buffer_end
-
-        # Process the remaining buffer
-        if buffer:
-            buffer = pattern.sub(replace_with, buffer)
-            temp_file.write(buffer)
-
-    # Replace the original file with the modified temporary file
-    os.replace(temp_file_path, file_path)
-
-# Example usage
-file_path = 'large_file.txt'
-replace_in_large_file(file_path)
+    replace_in_file(input_file_path, output_file_path, search_pattern, replace_string)
